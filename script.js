@@ -1,5 +1,5 @@
 const objetivo = new Date("2025-07-14T00:00:00").getTime();
-const inicio = new Date("2024-07-07T00:00:00").getTime();
+const inicio = new Date().getTime();
 const totalDuracion = objetivo - inicio;
 
 const contador = document.getElementById("cuenta-regresiva");
@@ -24,7 +24,6 @@ function actualizarMensaje() {
   mensaje.innerText = mensajes[indiceMensaje];
 }
 
-// Cambiar cada 10 segundos
 setInterval(actualizarMensaje, 10000);
 
 function actualizarCuenta() {
@@ -35,7 +34,18 @@ function actualizarCuenta() {
   if (restante <= 0) {
     contador.innerText = "¡Llegó el día! 💖";
     barra.style.width = "100%";
-    mensaje.innerText = "Bienvenida a la siguiente fase... ✨";
+    mensaje.innerText = "¡Puedes descubrir todo ahora! 💌";
+
+    setTimeout(() => {
+      document.querySelector('.fase-titulo').style.display = "none";
+      mensaje.style.display = "none";
+      document.querySelector('.barra-contenedor').style.display = "none";
+      contador.style.display = "none";
+
+      // Mostrar menú
+      document.getElementById("menu").style.display = "block";
+    }, 3000);
+
     return;
   }
 
@@ -52,3 +62,13 @@ function actualizarCuenta() {
 
 setInterval(actualizarCuenta, 1000);
 actualizarCuenta();
+
+function mostrarSeccion(id) {
+  // Ocultar todas las secciones
+  document.querySelectorAll('.seccion').forEach(seccion => {
+    seccion.style.display = "none";
+  });
+  
+  // Mostrar la seleccionada
+  document.getElementById(id).style.display = "block";
+}
